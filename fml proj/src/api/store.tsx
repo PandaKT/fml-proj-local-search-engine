@@ -2,7 +2,7 @@ export class ModelStore {
   storeID: string = "";
   storeName: string = "";
   storeLocation: string = "";
-  //   storeContact: string = "";
+  storeContact: string = "";
   storeDescription: string = "";
   ownerID: string = "";
 }
@@ -28,6 +28,7 @@ export async function getStore(storeID: string) {
   item.storeLocation = "mumbai, india";
   item.storeDescription = "desc";
   item.ownerID = "";
+  item.storeContact = "1232";
   return item;
 }
 
@@ -40,6 +41,7 @@ export async function getStoreList() {
     item.storeLocation = "mumbai, india";
     item.storeDescription = "desc";
     item.ownerID = "";
+    item.storeContact = "1232";
     ret.push(item);
   }
   return ret;
