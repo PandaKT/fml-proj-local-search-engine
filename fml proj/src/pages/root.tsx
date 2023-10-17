@@ -98,7 +98,6 @@ export function Root(props: Props) {
           sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
           aria-label="mailbox folders"
         >
-          {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
           <Drawer
             container={container}
             variant="temporary"
@@ -131,15 +130,18 @@ export function Root(props: Props) {
             {drawer}
           </Drawer>
         </Box>
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+            p: 3,
+            width: { sm: `calc(100% - ${drawerWidth}px)` },
+          }}
+        >
+          <Toolbar />
+          <Outlet />
+        </Box>
       </Box>
     </ThemeProvider>
   );
 }
-
-// loading anim
-// profile
-// store page touches
-// item page touches
-// download link
-// drawer highlight
-// images and data fix
