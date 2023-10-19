@@ -1,5 +1,5 @@
 import { ButtonBase, Chip, ListItemText } from "@mui/material";
-import { COLORS } from "../utils/constants";
+import { COLORS, RUPEE_SYMBOl } from "../utils/constants";
 import { WhatsApp } from "@mui/icons-material";
 import CallIcon from "@mui/icons-material/Call";
 
@@ -49,6 +49,22 @@ export function PhoneContact(props: { contact: string; whatsapp: string }) {
         style={{ color: COLORS.teal[900], padding: "8px" }}
         icon={<WhatsApp style={{ color: COLORS.teal[900] }} />}
       />
+    </div>
+  );
+}
+
+export function PriceChip(props: { amount: string; isSmall?: boolean }) {
+  const amount = props.amount;
+  const style = props.isSmall
+    ? "font-semibold w-fit px-1.5 "
+    : "text-xl w-fit px-4 py-1 ";
+  if (amount == null || amount.trim().length == 0) return <></>;
+  return (
+    <div
+      className={style + "font-medium rounded-full"}
+      style={{ backgroundColor: COLORS.green[50], color: COLORS.green[900] }}
+    >
+      {RUPEE_SYMBOl} {props.amount}
     </div>
   );
 }

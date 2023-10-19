@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   Banner,
   Heading,
@@ -11,6 +11,7 @@ import { Card, Divider } from "@mui/material";
 import { COLORS } from "../../utils/constants";
 import { ModelStore, getStore } from "../../api/store";
 import { useQuery } from "react-query";
+import { ItemsListPublic } from "../../components/item/items";
 
 export const StoreDataContext = createContext<{
   storeID: string;
@@ -22,6 +23,7 @@ export const StoreDataContext = createContext<{
 
 export function StorePage(props: any) {
   let { storeID } = useParams();
+  const navigate = useNavigate();
 
   storeID = storeID ?? "";
 
@@ -70,6 +72,11 @@ export function StorePage(props: any) {
           />
           <Divider />
           <div className="py-5" />
+          {/* <div>{storeData.storeTraits}</div> */}
+          <ItemsListPublic
+            storeID={storeID}
+            cardOnClick={(id) => navigate("item/id/" + id)}
+          />
         </div>
       </Card>
       <div className="h-32"></div>
