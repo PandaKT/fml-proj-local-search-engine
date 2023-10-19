@@ -1,4 +1,4 @@
-import { ButtonBase, Chip, ListItemText } from "@mui/material";
+import { ButtonBase, Chip, ListItemText, Typography } from "@mui/material";
 import { COLORS, RUPEE_SYMBOl } from "../utils/constants";
 import { WhatsApp } from "@mui/icons-material";
 import CallIcon from "@mui/icons-material/Call";
@@ -65,6 +65,21 @@ export function PriceChip(props: { amount: string; isSmall?: boolean }) {
       style={{ backgroundColor: COLORS.green[50], color: COLORS.green[900] }}
     >
       {RUPEE_SYMBOl} {props.amount}
+    </div>
+  );
+}
+
+export function Description(props: { description: string }) {
+  let desc = props.description;
+  if (!desc || desc.trim().length == 0) {
+    desc = "No Description added!";
+  }
+  return (
+    <div className="py-2">
+      <Typography gutterBottom variant="h5" component="div">
+        About
+      </Typography>
+      <div className="text-gray-500">{desc}</div>
     </div>
   );
 }
