@@ -20,9 +20,6 @@ export function ItemsListPublic(props: {
   if (isLoading) return <div>LOADING...</div>;
   if (isError) return <div>{JSON.stringify(error)}</div>;
 
-  if (!data || data?.length == 0) {
-  }
-
   return (
     <div>
       <div className="flex flex-row justify-between">
