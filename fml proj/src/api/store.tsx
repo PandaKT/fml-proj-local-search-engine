@@ -1,3 +1,5 @@
+import { faker } from "@faker-js/faker";
+
 export class ModelStore {
   storeID: string = "";
   storeName: string = "";
@@ -24,11 +26,11 @@ const storeIds = [
 export async function getStore(storeID: string) {
   let item = new ModelStore();
   item.storeID = storeID;
-  item.storeName = Math.random() + "";
-  item.storeLocation = "mumbai, india";
-  item.storeDescription = "desc";
+  item.storeName = faker.company.name();
+  item.storeLocation = faker.location.streetAddress();
+  item.storeDescription = faker.company.catchPhraseDescriptor();
   item.ownerID = "";
-  item.storeContact = "1232";
+  item.storeContact = faker.phone.number();
   return item;
 }
 
@@ -37,11 +39,11 @@ export async function getStoreList() {
   for (let i = 0; i < 10; i++) {
     let item = new ModelStore();
     item.storeID = storeIds[i];
-    item.storeName = Math.random() + "";
-    item.storeLocation = "mumbai, india";
-    item.storeDescription = "desc";
+    item.storeName = faker.company.name();
+    item.storeLocation = faker.location.streetAddress();
+    item.storeDescription = faker.company.catchPhraseDescriptor();
     item.ownerID = "";
-    item.storeContact = "1232";
+    item.storeContact = faker.phone.number();
     ret.push(item);
   }
   return ret;

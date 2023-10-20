@@ -1,3 +1,5 @@
+import { faker } from "@faker-js/faker";
+
 export class ModelItem {
   storeID = "";
   itemID = "";
@@ -24,12 +26,12 @@ const itemIds = [
 export async function getItem(itemID: string, storeID: string) {
   let item = new ModelItem();
   item.storeID = storeID;
-  item.name = Math.random() + "";
-  item.price = "100";
-  item.description = "desc";
+  item.itemID = itemID;
+  item.name = faker.commerce.productName();
+  item.price = faker.commerce.price();
+  item.description = faker.commerce.productDescription();
   item.timestamp = Math.random() + "";
   item.uploaderID = "";
-  item.itemID = itemID;
   return item;
 }
 
@@ -39,11 +41,12 @@ export async function getItemList(storeID: string) {
     let item = new ModelItem();
     item.itemID = itemIds[i];
     item.storeID = storeID;
-    item.name = Math.random() + "";
-    item.price = "100";
-    item.description = "desc";
+    item.name = faker.commerce.productName();
+    item.price = faker.commerce.price();
+    item.description = faker.commerce.productDescription();
     item.timestamp = Math.random() + "";
     item.uploaderID = "";
+
     ret.push(item);
   }
   return ret;
