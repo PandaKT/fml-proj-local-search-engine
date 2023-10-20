@@ -21,7 +21,12 @@ function Carousel_network(props: { itemID: string }) {
         {(query.data as string[]).map((picMeta, i) => (
           <div key={i} className="rounded-md shadow-md">
             <Paper>
-              <div className="w-32 h-64 rounded-md object-cover bg-gray-200"></div>
+              <div className="w-32 h-64 rounded-md object-cover bg-gray-200">
+                <img
+                  className="w-32 h-64 rounded-md object-cover"
+                  src={picMeta}
+                />
+              </div>
             </Paper>
           </div>
         ))}
