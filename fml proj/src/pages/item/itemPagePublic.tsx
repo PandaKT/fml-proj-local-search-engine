@@ -11,7 +11,7 @@ function Carousel_network(props: { itemID: string }) {
     queryFn: async () => {
       return await getItemPics(props.itemID!);
     },
-    queryKey: [props.itemID!, "itemData"],
+    queryKey: [props.itemID!, "itemPics"],
   });
   if (query.isError) return <>ERROR</>;
   if (query.isLoading) return <>LOADING</>;
