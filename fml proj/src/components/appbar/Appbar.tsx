@@ -12,9 +12,37 @@ import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { styled } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import CloseIcon from "@mui/icons-material/Close";
+import InputBase from "@mui/material/InputBase";
 
 const drawerWidth = 240;
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
+    },
+  },
+}));
 
 export function MyAppBar() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -154,6 +182,10 @@ export function MyAppBar() {
           >
             FML PROJ
           </Typography>
+          <div className="ml-8 w-1/4">
+            <MySearchBox onBlur={() => {}} onFocus={() => {}} />
+          </div>
+          <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -171,5 +203,45 @@ export function MyAppBar() {
       {renderMobileMenu}
       {renderMenu}
     </Box>
+  );
+}
+
+function MySearchBox(props: any) {
+  const [inputValue, setInputValue] = useState("");
+  const inputRef = useRef(null);
+
+  const isSearchStalled = status === "stalled";
+
+  function setQuery(newQuery: string) {
+    setInputValue(newQuery);
+  }
+  return (
+    <div className="flex border-[1px]  border-slate-300 flex-row gap-1 justify-start items-center rounded-full">
+      <SearchIconWrapper>
+        <SearchIcon sx={{ color: "text.secondary" }} />
+      </SearchIconWrapper>
+      <StyledInputBase
+        placeholder="Search…"
+        autoComplete="off"
+        autoCorrect="off"
+        autoCapitalize="off"
+        spellCheck={false}
+        // type="search"
+        onBlur={props.onBlur}
+        onFocus={props.onFocus}
+        value={inputValue}
+        style={{
+          width: "100%",
+        }}
+        inputProps={{ "aria-label": "search" }}
+        onChange={(event: any) => {
+          setQuery(event.currentTarget.value);
+        }}
+        autoFocus
+      />
+      <div className="mx-4 cursor-pointer" onClick={() => setQuery("")}>
+        <CloseIcon sx={{ color: "text.secondary" }} />
+      </div>
+    </div>
   );
 }
