@@ -1,7 +1,15 @@
-import { ButtonBase, Chip, ListItemText, Typography } from "@mui/material";
+import {
+  Avatar,
+  ButtonBase,
+  Chip,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import { COLORS, RUPEE_SYMBOl } from "../utils/constants";
 import { WhatsApp } from "@mui/icons-material";
 import CallIcon from "@mui/icons-material/Call";
+import { getUserAvatar } from "../api/pics/pics";
+import { useQuery } from "react-query";
 
 export function Banner(props: { url: string }) {
   return <div className="w-full h-96 bg-gray-100"></div>;
@@ -83,3 +91,21 @@ export function Description(props: { description: string }) {
     </div>
   );
 }
+
+export const MyAvatarImage = (props: {
+  imageClass?: string;
+  userName?: string;
+  borderClass?: string;
+  userID: string;
+}) => {
+  const imgQuery = useQuery({
+    queryFn: async () => {
+      return await getUserAvatar(props.userID);
+    },
+    queryKey: ["userAvatar", props.userID],
+  });
+
+  let imageClass = props.imageClass ? props.imageClass : "w-24 h-24";
+
+  return <Avatar src="/broken-image.jpg" className={imageClass} />;
+};
