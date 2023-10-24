@@ -9,6 +9,13 @@ export class ModelStore {
   ownerID: string = "";
 }
 
+export class ModelStoreAdd {
+  storeName: string = "";
+  storeLocation: string = "";
+  storeContact: string = "";
+  storeDescription: string = "";
+}
+
 // stub data only
 const storeIds = [
   "store-1",
@@ -47,4 +54,8 @@ export async function getStoreList() {
     ret.push(item);
   }
   return ret;
+}
+
+export async function postStore(storeData: ModelStoreAdd) {
+  return 0;
 }
